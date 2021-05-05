@@ -41,5 +41,35 @@ def get_login(connection,username,password):
     return(account)
 
 def get_menu(connection):
-    combo = pd.read_sql('SELECT * FROM combo',connection)
-    print(combo)
+
+    #inner class for food item
+    class __item__:
+        def __init__(self,number,item,price):
+            self.number = number
+            self.item = item
+            self.price=price
+    
+    combos_df = pd.read_sql('SELECT * FROM combo',connection)
+    pizzas_df = pd.read_sql('SELECT * FROM pizza',connection)
+    sides_df = pd.read_sql('SELECT * FROM sides',connection)
+    subs_df = pd.read_sql('SELECT * FROM subs',connection)
+
+    combos = []
+    for row in combos_df.itertuples():
+        combos.append(__item__(row[1],row[2],row[3]))
+
+    pizzas = []
+    for row in pizzas_df.itertuples():
+        pizzas.append(__item__(row[1],row[2],row[3]))
+
+    sides = []
+    for row in sides_df.itertuples():
+        sides.append(__item__(row[1],row[2],row[3]))
+
+    subs = []
+    for row in subs_df.itertuples():
+        subs.append(__item__(row[1],row[2],row[3]))
+    
+
+    return (combos,pizzas,sides,subs)
+    

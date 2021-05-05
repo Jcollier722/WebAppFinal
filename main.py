@@ -57,9 +57,20 @@ def index():
    
 @app.route('/customer.html', methods=['GET', 'POST'])
 def customer_home():
-    db.get_menu(db.get_connection())
     
-    return render_template('customer.html',customer=session['username'])
+    menu = db.get_menu(db.get_connection())
+
+    combos = menu[0]
+    pizzas = menu[1]
+    sides  = menu[2]
+    subs   = menu[3]
+    
+    return render_template('customer.html',
+                           customer=session['username'],
+                           combos=combos,
+                           pizzas=pizzas,
+                           sides=sides,
+                           subs=subs)
     
 
 if __name__ == '__main__':

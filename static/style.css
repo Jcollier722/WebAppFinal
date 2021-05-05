@@ -14,6 +14,8 @@ h2{
 	font-size: 20px;
 }
 
+
+
 div.title{
 	border:5px solid;
 	background-color: white;
@@ -24,4 +26,53 @@ div.title{
 
 body{
 	background-image: url('../static/img/bg.jpg');
+}
+
+
+div.menu{
+	overflow-y: auto;
+	margin-left: 2%;
+	margin-top: 1%;
+	background: white;
+	padding-left: 10px;
+	border: 5px solid;
+	height: 90%;
+	width: 50%;
+}
+
+div.menu_title{
+	text-align: center;
+	font-size: 48px;
+	font-weight: bold;
+}
+
+div.menu_cat{
+	text-align: center;
+	font-size: 32px;
+	font-weight: bold;
+}
+
+div.item_num{
+	float:left;
+	text-align: left;
+	font-size:  15px;
+	font-weight:bold;
+}
+div.item_desc{
+	float:center;
+	text-align: center;
+	font-size:  15px;
+	font-weight:bold;
+}
+div.item_price{
+	text-align: center;
+	font-size:  15px;
+	font-weight:bold;
+}
+
+.add{
+	display: block;
+	margin-left: auto;
+	margin-top: auto;
+	margin-bottom: auto;
 }
