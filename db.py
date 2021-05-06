@@ -76,4 +76,21 @@ def send_order(connection,order):
     cursor=connection.cursor(dictionary=True)
     cursor.execute('INSERT INTO `orders` (`cus_order`, `paid`) VALUES (%s, %s)',(order,'Paid by Credit Card',))
     connection.commit()
+
+def get_orders(connection):
+    class __order__:
+        def __init__(self,num,order,paid):
+            self.num = num
+            self.order=order
+            self.paid=paid
+
+    orders= []
+    
+    order_df = pd.read_sql('SELECT * FROM orders',connection)
+
+    for row in order_df.itertuples():
+        orders.append(__order__(row[1],row[2],row[3]))
+
+    return orders
+    
     

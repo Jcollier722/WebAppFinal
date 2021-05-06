@@ -6,31 +6,33 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link rel="stylesheet" href="../static/style.css">
 
-    <title>Collier Web App - Order</title>
+    <title>Collier Web App - Employee Home</title>
 
 </head>
 
+
+
 <body>
+	<div class = "title"> Welcome back, {{employee}}</div>
 
-<div class = "title"> Thanks for your order!</div>
+	<div class = "order_container">
 
-<div class = "receipt">
+		<div class = "order_title">Orders</div><hr>
 
-	<div class ="thanks">Thanks for ordering from Collier's Italian Food <br> Your order should be ready in 30 minutes.<hr></div>
+		{% for o in orders %}
+			<div class ="order_num">Order Number: {{o.num}}</div>
+			<div class ="order_content">Order: {{o.order}}</div>
+			<hr>
+		{% endfor %}
 
-	<h2> You ordered:</h2>
-	<hr>
-	{% for o in order %}
-		<h2> {{o}} <h2>
-		<hr>
-	{% endfor %}
 
-	<span>Subtotal: {{subtotal}} </span><hr>
-	<span>Tax: {{tax}} </span><hr>
-	<span>Total: {{total}} </span><hr>
 
-</div>
 
+	</div>
+
+
+
+	
 
 </body>
 

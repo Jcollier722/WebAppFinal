@@ -26,7 +26,8 @@
 		let element = document.getElementById('cart');
 		element.innerHTML += '<div class = "order_item">'+item+"...."+price+'';
 		update_total(parseFloat(price.substring(1)));
-		order+=item+" , ";
+		order+= (item+"...."+price+":");
+		
 		document.getElementById("current_order").value = order;
 
 		
@@ -47,6 +48,10 @@
 		let total_el = document.getElementById('total');
 		
 		total_el.innerHTML = '<div class = "order_item_1"> Subtotal .......'+total.toFixed(2)+'<hr>'+ 'Tax .......'+tax +'<hr>'+'Total .......'+fin_total+'</div>';
+
+		document.getElementById("subtotal").value = total.toFixed(2);
+		document.getElementById("tax").value = tax;
+		document.getElementById("total").value = total+tax;
 
 	}
 
@@ -139,6 +144,9 @@
 			<form class="form-signin" action = "/customer.html" method = "post">
 				<input type="hidden" name="myforms" value="order">
 				<input type="hidden" name="this_order" id ="current_order" value="">
+				<input type="hidden" name="this_sub"   id ="subtotal" value="">
+				<input type="hidden" name="this_tax"   id ="tax" value="">
+				<input type="hidden" name="this_total" id ="total" value="">
 				<input type="Submit" value ="Submit Order">
 			</form>
 

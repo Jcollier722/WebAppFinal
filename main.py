@@ -40,10 +40,12 @@ def index():
             login_attempt=db.get_login(db.get_connection(),request.form['ename'],request.form['epass'])
             if(login_attempt != None):
                 if(login_attempt['username']==request.form['ename'] and login_attempt['password']==request.form['epass']):
-                    print("employee logged in")
+                    session['loggedin']=True
+                    session['username']=login_attempt['username']
+                    return redirect(url_for('employee_home'))
             else:
                 error2 = 'Invalid Credentials. Try again.'
-                    
+        """            
         #admin login
         if request.form["myforms"]=="admin":
             login_attempt=db.get_login(db.get_connection(),request.form['aname'],request.form['apass'])
@@ -52,12 +54,12 @@ def index():
                     print("admin logged in")
             else:
                 error3 = 'Invalid Credentials. Try again.'
-            
+        """ 
     return render_template('index.html',error1=error1,error2=error2,error3=error3)
    
 @app.route('/customer.html', methods=['GET', 'POST'])
 def customer_home():
-    
+
     menu = db.get_menu(db.get_connection())
 
     combos = menu[0]
@@ -68,8 +70,20 @@ def customer_home():
     if request.method == 'POST':
         if request.form["myforms"]=="order":
             db.send_order(db.get_connection(),request.form['this_order'])
-            print("ordered")
-        
+            
+            order = request.form['this_order']
+            subtotal = request.form['this_sub']
+            tax = request.form['this_tax']
+
+            total=(float(subtotal)+float(tax))
+
+            session['order']=order
+            session['subtotal']=subtotal
+            session['tax']=tax
+            session['total']=total
+            
+            return redirect(url_for('thank_cus'))
+            
   
     return render_template('customer.html',
                            customer=session['username'],
@@ -78,8 +92,19 @@ def customer_home():
                            sides=sides,
                            subs=subs)
 
+@app.route('/thanks.html', methods=['GET', 'POST'])
+def thank_cus():
+    order = session['order']
+    order_list= order.split(':')
+    return render_template('thanks.html',order=order_list,subtotal=session['subtotal'],tax=session['tax'],total = session['total'])
 
 
+@app.route('/employee.html', methods=['GET', 'POST'])
+def employee_home():
+    orders = db.get_orders(db.get_connection())
+    
+        
+    return render_template('employee.html',employee=session['username'],orders=orders)
 
 if __name__ == '__main__':
     app.run()

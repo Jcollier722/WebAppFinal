@@ -113,3 +113,54 @@ div.invisible {
     position: absolute;
     top: -9999px;
 }
+
+div.receipt{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2%;
+	height: 80%;
+	width: 80%;
+	background:white;
+	border: 5px solid;
+}
+
+div.thanks{
+	text-align: center;
+	font-size: 30px;
+	font-style: italic;
+}
+
+div.rec_item{
+	text-align: left;
+	font-size: 20px;
+	font-style: italic;
+}
+
+div.order_container{
+	overflow-x: auto;
+	overflow-y: auto;
+	display: block;
+	margin-top: 1%;
+	height: 30%;
+	width: 100%;
+	border: 5px solid;
+	background: white;
+}
+div.order_title{
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+div.order_num{
+	font-size: 25px;
+	font-weight: bold.
+	text-align: left;
+}
+
+div.order_content{
+	font-size: 20px;
+	font-style: italic;
+	text-align: left;
+}
