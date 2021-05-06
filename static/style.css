@@ -115,6 +115,8 @@ div.invisible {
 }
 
 div.receipt{
+	overflow: scroll;
+	overflow-y: auto;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -142,7 +144,7 @@ div.order_container{
 	overflow-y: auto;
 	display: block;
 	margin-top: 1%;
-	height: 30%;
+	height: 60%;
 	width: 100%;
 	border: 5px solid;
 	background: white;
@@ -155,7 +157,7 @@ div.order_title{
 
 div.order_num{
 	font-size: 25px;
-	font-weight: bold.
+	font-weight: bold;
 	text-align: left;
 }
 
@@ -163,4 +165,43 @@ div.order_content{
 	font-size: 20px;
 	font-style: italic;
 	text-align: left;
+}
+
+div.clear_order{
+	border: 5px solid;
+	width: 100%;
+	justify-content: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	background: white;
+
+}
+
+div.change_menu{
+	border: 5px solid;
+	width: 50%;
+	display: block;
+	margin-right: auto;
+	background: white;
+}
+div.change_menu_1{
+	border: 5px solid;
+	width: 48%;
+	display: block;
+	margin-bottom: auto;
+	margin-left: auto;
+	background: white;
+}
+
+div.form_heading{
+	text-align: center;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+div.form_title{
+	text-align: left;
+	font-size: 20px;
+	font-weight: bold;
 }

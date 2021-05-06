@@ -1,6 +1,7 @@
 import mysql.connector
 import configparser
 import pandas as pd
+import random
 from mysql.connector import Error
 
 #return connection to sql
@@ -73,8 +74,13 @@ def get_menu(connection):
     return (combos,pizzas,sides,subs)
 
 def send_order(connection,order):
+    
+    balance = ['Paid by Credit Card','Paid by Gift Card','Paid with DoorDash','Will pay with cash on pickup']
+
+    balance_owed = random.choice(balance)
+    
     cursor=connection.cursor(dictionary=True)
-    cursor.execute('INSERT INTO `orders` (`cus_order`, `paid`) VALUES (%s, %s)',(order,'Paid by Credit Card',))
+    cursor.execute('INSERT INTO `orders` (`cus_order`, `paid`) VALUES (%s, %s)',(order,balance_owed,))
     connection.commit()
 
 def get_orders(connection):
@@ -92,5 +98,29 @@ def get_orders(connection):
         orders.append(__order__(row[1],row[2],row[3]))
 
     return orders
+
+def finish_order(connection,order_id):
+    cursor=connection.cursor(dictionary=True)
+    cursor.execute('DELETE FROM `orders` WHERE orderID = %s',(order_id,))
+    connection.commit()
+
+def add_combo(connection,item,price):
+    cursor=connection.cursor(dictionary=True)
+    cursor.execute('INSERT INTO `combo` (`descr`, `price`) VALUES (%s, %s)',(item,price,))
+    connection.commit()
     
+def add_pizza(connection,item,price):
+    cursor=connection.cursor(dictionary=True)
+    cursor.execute('INSERT INTO `pizza` (`descr`, `price`) VALUES (%s, %s)',(item,price,))
+    connection.commit()
+    
+def add_side(connection,item,price):
+    cursor=connection.cursor(dictionary=True)
+    cursor.execute('INSERT INTO `sides` (`descr`, `price`) VALUES (%s, %s)',(item,price,))
+    connection.commit()
+   
+def add_sub(connection,item,price):
+    cursor=connection.cursor(dictionary=True)
+    cursor.execute('INSERT INTO `subs` (`descr`, `price`) VALUES (%s, %s)',(item,price,))
+    connection.commit()
     

@@ -59,7 +59,6 @@ def index():
    
 @app.route('/customer.html', methods=['GET', 'POST'])
 def customer_home():
-
     menu = db.get_menu(db.get_connection())
 
     combos = menu[0]
@@ -102,7 +101,27 @@ def thank_cus():
 @app.route('/employee.html', methods=['GET', 'POST'])
 def employee_home():
     orders = db.get_orders(db.get_connection())
-    
+
+    if request.method == 'POST':
+        if request.form["myforms"]=="complete_order":
+            db.finish_order(db.get_connection(),request.form['order_id'])
+            return redirect(url_for('employee_home'))
+
+        if request.form["myforms"]=="add_menu":
+            item_type = request.form['type']
+            
+            if(item_type == "combo"):
+                db.add_combo(db.get_connection(),request.form['item'],request.form['price'])
+            if(item_type == "pizza"):
+                db.add_pizza(db.get_connection(),request.form['item'],request.form['price'])
+            if(item_type == "side"):
+                db.add_side(db.get_connection(),request.form['item'],request.form['price'])
+            if(item_type == "subs"):
+                db.add_sub(db.get_connection(),request.form['item'],request.form['price'])
+                
+            
+            print(request.form['item'],request.form['price'])
+        
         
     return render_template('employee.html',employee=session['username'],orders=orders)
 

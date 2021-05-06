@@ -22,13 +22,67 @@
 		{% for o in orders %}
 			<div class ="order_num">Order Number: {{o.num}}</div>
 			<div class ="order_content">Order: {{o.order}}</div>
+			<div class ="order_content">Balance: {{o.paid}}</div>
 			<hr>
 		{% endfor %}
 
-
-
-
 	</div>
+
+
+<div class = "clear_order">
+
+	<div style="padding-left: 40%;">
+	<!-- https://getbootstrap.com/docs/4.0/components/forms/ -->
+	<form class="form-inline" action = "/employee.html" method = "post">
+
+	<input type="hidden" name="myforms" value="complete_order">
+
+	  <div class="form-group mx-sm-3 mb-2">
+	    <label for="order_num" class="sr-only">Clear Order</label>
+	    <input type="text" class="form-control" id="order_num" name = "order_id"placeholder="Order Number">
+	  </div>
+	  <button type="submit" class="btn btn-primary mb-2">Complete Order</button>
+	</form>
+</div>
+</div>
+
+
+<div class = "change_menu">
+<!-- https://getbootstrap.com/docs/4.0/components/forms/ -->
+<div class = "form_heading"> Add item to menu</div>
+
+<form action = "/employee.html" method = "post">
+
+	<input type="hidden" name="myforms" value="add_menu">
+
+	  <div class="form-group">
+
+	    <div class ="form_title">Item</div>
+	    <input type="text" class="form-control" id="item" name = "item" placeholder="Enter item">
+
+	   	<div class ="form_title">Item Price</div>
+	    <input type="text" class="form-control" id="price" name = "price" placeholder="Enter Price">
+
+	    <div class ="form_title">Item Type</div>
+
+	    <select name="type" id="type">
+		  <option value="combo">Combos</option>
+		  <option value="pizza">Pizzas</option>
+		  <option value="side">Sides</option>
+		  <option value="subs">Subs</option>
+		</select>
+		<br>
+	  	
+
+	  	<button type="submit" class="btn btn-primary">Submit</button>
+	  
+	  </div>
+
+</form>
+
+</div>
+
+
 
 
 
