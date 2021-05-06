@@ -41,7 +41,6 @@ def get_login(connection,username,password):
     return(account)
 
 def get_menu(connection):
-
     #inner class for food item
     class __item__:
         def __init__(self,number,item,price):
@@ -72,4 +71,9 @@ def get_menu(connection):
     
 
     return (combos,pizzas,sides,subs)
+
+def send_order(connection,order):
+    cursor=connection.cursor(dictionary=True)
+    cursor.execute('INSERT INTO `orders` (`cus_order`, `paid`) VALUES (%s, %s)',(order,'Paid by Credit Card',))
+    connection.commit()
     

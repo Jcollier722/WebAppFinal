@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session,jsonify
 from flask_nav import Nav
 from flask_nav.elements import *
 import db
@@ -64,14 +64,22 @@ def customer_home():
     pizzas = menu[1]
     sides  = menu[2]
     subs   = menu[3]
-    
+
+    if request.method == 'POST':
+        if request.form["myforms"]=="order":
+            db.send_order(db.get_connection(),request.form['this_order'])
+            print("ordered")
+        
+  
     return render_template('customer.html',
                            customer=session['username'],
                            combos=combos,
                            pizzas=pizzas,
                            sides=sides,
                            subs=subs)
-    
+
+
+
 
 if __name__ == '__main__':
     app.run()

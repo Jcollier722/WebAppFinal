@@ -10,11 +10,48 @@
 
 </head>
 
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
 <script type="text/javascript">
 	
+	var total = 0;
+	var order = "";
+
+
 	function add_to_cart(item,price){
-		alert(item+price);
+
+		let element = document.getElementById('cart');
+		element.innerHTML += '<div class = "order_item">'+item+"...."+price+'';
+		update_total(parseFloat(price.substring(1)));
+		order+=item+" , ";
+		document.getElementById("current_order").value = order;
+
+		
 	}
+
+	function update_total(price)
+	{
+		total +=price;
+		
+		var tax = total * 0.07;
+		fin_total = total+tax;
+
+		tax = tax.toFixed(2);
+
+		
+		fin_total = fin_total.toFixed(2);
+
+		let total_el = document.getElementById('total');
+		
+		total_el.innerHTML = '<div class = "order_item_1"> Subtotal .......'+total.toFixed(2)+'<hr>'+ 'Tax .......'+tax +'<hr>'+'Total .......'+fin_total+'</div>';
+
+	}
+
+
+
 
 </script>
 
@@ -22,6 +59,7 @@
 
 	<div class = "title"> Welcome back, {{customer}}</div>
 
+	
 		<div class = "menu">
 			<div class = "menu_title">Menu</div>
 			<br><hr>
@@ -52,7 +90,7 @@
 					<div class = "item_desc">{{p.item}}</div>
 					<div class = "item_price">{{p.price}}</div>
 
-					<input type = "submit"  value="Add to order" class ="add">
+					<button type="button" class = "add" onclick="add_to_cart('{{p.item}}','{{p.price}}')">Add to order</button>
 				</form>
 				<hr>
 			{% endfor %}
@@ -64,7 +102,7 @@
 					<div class = "item_num">#{{s.number}}</div>
 					<div class = "item_desc">{{s.item}}</div>
 					<div class = "item_price">{{s.price}}</div>
-					<input type = "submit"  value="Add to order" class ="add">
+					<button type="button" class = "add" onclick="add_to_cart('{{s.item}}','{{s.price}}')">Add to order</button>
 				</form>
 				<hr>
 			{% endfor %}
@@ -76,17 +114,39 @@
 					<div class = "item_num">#{{su.number}}</div>
 					<div class = "item_desc">{{su.item}}</div>
 					<div class = "item_price">{{su.price}}</div>
-					<input type = "submit"  value="Add to order" class ="add">
+					<button type="button" class = "add" onclick="add_to_cart('{{su.item}}','{{su.price}}')">Add to order</button>
 				</form>
 				<hr>
 			{% endfor %}
 
-	
-	
-
 		</div>
-	
 
+	
+		<div style="float:right; width: 40%;padding-right: 100px;padding-top: 12px;">
+
+			<div class = "cart" id = "cart">
+
+				<div class = "menu_title">Cart</div>
+				<br><hr>
+
+
+			</div>
+			
+			<div class ="total" id = "total">
+			
+			</div>
+
+			<form class="form-signin" action = "/customer.html" method = "post">
+				<input type="hidden" name="myforms" value="order">
+				<input type="hidden" name="this_order" id ="current_order" value="">
+				<input type="Submit" value ="Submit Order">
+			</form>
+
+		
+		</div>
+
+
+	
 
 </body>
 </html>
