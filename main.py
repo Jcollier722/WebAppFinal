@@ -118,12 +118,42 @@ def employee_home():
                 db.add_side(db.get_connection(),request.form['item'],request.form['price'])
             if(item_type == "subs"):
                 db.add_sub(db.get_connection(),request.form['item'],request.form['price'])
-                
+
+        if request.form["myforms"]=="rem_menu":
+
+            item_type = request.form['type_id']
             
-            print(request.form['item'],request.form['price'])
-        
+            if(item_type == "combo"):
+                db.delete_combo(db.get_connection(),request.form['item_id'])
+            if(item_type == "pizza"):
+                db.delete_pizza(db.get_connection(),request.form['item_id'])
+            if(item_type == "side"):
+                db.delete_side(db.get_connection(),request.form['item_id'])
+            if(item_type == "subs"):
+                db.delete_sub(db.get_connection(),request.form['item_id'])
         
     return render_template('employee.html',employee=session['username'],orders=orders)
+
+@app.route('/register.html', methods=['GET', 'POST'])
+def register_user():
+    reg = ''
+    if request.method == 'POST':
+        if request.form["myforms"]=="register":
+            uname = request.form['cname']
+            upass = request.form['cpass']
+            first = request.form['fname']
+            last = request.form['lname']
+            addr = request.form['addr']
+            pay = request.form['pay']
+
+            reg_s = db.register_customer(db.get_connection(),uname,upass)
+
+            if (reg_s == -1):
+                reg = 'Registration Failed, try again later'
+            else:
+                reg = 'Registration successful, you can close this tab and login.'
+        
+    return render_template('register.html',reg=reg)
 
 if __name__ == '__main__':
     app.run()

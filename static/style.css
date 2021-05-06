@@ -14,7 +14,11 @@ h2{
 	font-size: 20px;
 }
 
-
+h5{
+	text-align: left;
+	font-size: 20px;
+	font-weight: bold;
+}
 div.title{
 	border:5px solid;
 	background-color: white;
@@ -179,20 +183,14 @@ div.clear_order{
 }
 
 div.change_menu{
+	opacity: 95%;
 	border: 5px solid;
-	width: 50%;
+	width: 100%;
 	display: block;
 	margin-right: auto;
 	background: white;
 }
-div.change_menu_1{
-	border: 5px solid;
-	width: 48%;
-	display: block;
-	margin-bottom: auto;
-	margin-left: auto;
-	background: white;
-}
+
 
 div.form_heading{
 	text-align: center;
@@ -204,4 +202,16 @@ div.form_title{
 	text-align: left;
 	font-size: 20px;
 	font-weight: bold;
+}
+
+div.register{
+	border: 5px solid;
+	height: 80%;
+	width: 80%;
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2%;
+	background: white;
+
 }

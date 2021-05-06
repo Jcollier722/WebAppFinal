@@ -123,4 +123,33 @@ def add_sub(connection,item,price):
     cursor=connection.cursor(dictionary=True)
     cursor.execute('INSERT INTO `subs` (`descr`, `price`) VALUES (%s, %s)',(item,price,))
     connection.commit()
+
+def delete_combo(connection,row_id):
+    cursor=connection.cursor(dictionary=True)
+    cursor.execute('DELETE FROM `combo` WHERE num = %s',(row_id,))
+    connection.commit()
     
+def delete_pizza(connection,row_id):
+    cursor=connection.cursor(dictionary=True)
+    cursor.execute('DELETE FROM `pizza` WHERE num = %s',(row_id,))
+    connection.commit()
+
+def delete_side(connection,row_id):
+    cursor=connection.cursor(dictionary=True)
+    cursor.execute('DELETE FROM `sides` WHERE num = %s',(row_id,))
+    connection.commit()
+
+def delete_sub(connection,row_id):
+    cursor=connection.cursor(dictionary=True)
+    cursor.execute('DELETE FROM `subs` WHERE num = %s',(row_id,))
+    connection.commit()
+
+def register_customer(connection,uname,passw):
+    try:
+        cursor=connection.cursor(dictionary=True)
+        cursor.execute('INSERT INTO `login` (`username`, `password`) VALUES (%s, %s)',(uname,passw,))
+        connection.commit()
+        return 1
+    except:
+        return -1
+

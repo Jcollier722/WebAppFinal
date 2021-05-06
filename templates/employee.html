@@ -82,6 +82,38 @@
 
 </div>
 
+<div class = "change_menu">
+<!-- https://getbootstrap.com/docs/4.0/components/forms/ -->
+<div class = "form_heading"> Remove Item From Menu</div>
+
+<form action = "/employee.html" method = "post">
+
+	<input type="hidden" name="myforms" value="rem_menu">
+
+	  <div class="form-group">
+
+	    <div class ="form_title">Item</div>
+	    <input type="text" class="form-control" id="item" name = "item_id" placeholder="Enter item ID">
+
+
+	    <div class ="form_title">Item Type</div>
+
+	    <select name="type_id" id="type_id">
+		  <option value="combo">Combos</option>
+		  <option value="pizza">Pizzas</option>
+		  <option value="side">Sides</option>
+		  <option value="subs">Subs</option>
+		</select>
+		<br>
+	  	
+
+	  	<button type="submit" class="btn btn-primary">Submit</button>
+	  
+	  </div>
+
+</form>
+
+</div>
 
 
 
